@@ -1,18 +1,21 @@
-import { pets } from '../json/index.js';
 import { petFactory } from "../models/index.js";
 
 
 class PetsCollection {
+
     fetchData() {
-        let loadedPets = JSON.parse(localStorage.getItem('pets'));
-        if (!loadedPets) {
-            localStorage.setItem('pets', JSON.stringify(pets));
-            loadedPets = pets;
-        }
+        return fetch('js/json/pets.json')
+            .then(response => response.json())
+            .then(response => {
+                let loadedPets = JSON.parse(localStorage.getItem('pets'));
+                if (!loadedPets) {
+                    localStorage.setItem('pets', JSON.stringify(response));
+                    loadedPets = response;
+                }
 
-        this.petsModels = loadedPets.map(pet => petFactory(pet));
+                this.petsModels = loadedPets.map(pet => petFactory(pet));
+            });
     }
-
     getPetsModels() {
         return this.petsModels;
     }

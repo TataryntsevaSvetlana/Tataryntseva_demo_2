@@ -12,15 +12,15 @@ class Controller {
         const initialLang = 'en';
 
         this.petsCollection = new PetsCollection();
-        this.petsCollection.fetchData();
-
-        this.initTranslatorDropDownView(initialLang);
-        this.initPetListView(initialLang);
-        this.initPopUpView(initialLang);
-        this.initCartView(initialLang);
-        this.initButtonCartView(initialLang);
-        this.initFilterView(initialLang);
-        this.initCheckoutView(initialLang);
+        this.petsCollection.fetchData().then(() => {
+            this.initTranslatorDropDownView(initialLang);
+            this.initPetListView(initialLang);
+            this.initPopUpView(initialLang);
+            this.initCartView(initialLang);
+            this.initButtonCartView(initialLang);
+            this.initFilterView(initialLang);
+            this.initCheckoutView(initialLang);
+        });
     }
 
     initPetListView(initialLang) {
